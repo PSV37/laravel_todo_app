@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use \App\Category;
+use \App\User;
+use Mail;
+use App\Mail\UserPasswordEmail;
+use Hash;
 use Gate;
+use DateTime;
 
-class CategoryController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +23,8 @@ class CategoryController extends Controller
             abort(404,"Sorry, You can do this actions");
         }
         
-        $categories = Category::all();
-        return view('category.index',compact('categories'));
+        $users = User::all();
+        return view('user.index',compact('users'));
     }
 
 
@@ -32,10 +36,20 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        
-        Category::create($request->all());
+    
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'user_type' => $request->user_type,
+            'created_at' => new \DateTime('NOW')
 
-        return back()->with('success_msg', 'Category Added successfully ');
+        ]);
+        // User::create($request->all());
+
+        Mail::to($request->email)->send(new UserPasswordEmail($request));
+        
+        return back()->with('success_msg', 'User created successfully and send credentials on user email');  
     }
 
     /**
@@ -70,11 +84,11 @@ class CategoryController extends Controller
     public function update(Request $request)
     {
 
-        $category = Category::findOrFail($request->category_id);
+        $category = User::findOrFail($request->user_id);
 
         $category->update($request->all());
        
-        return back()->with('success_msg', 'Category Updated successfully ');
+        return back()->with('success_msg', 'User Updated successfully ');
     }
 
     /**
@@ -85,11 +99,12 @@ class CategoryController extends Controller
      */
     public function destroy(Request $request)
     {
+        // return $request;
         
-        $category = Category::findOrFail($request->category_id);
+        $category = User::findOrFail($request->user_id);
         $category->delete();
 
-        return back()->with('success_msg', 'Category Deleted successfully ');
+        return back()->with('success_msg', 'User Deleted successfully ');
 
     }
 }

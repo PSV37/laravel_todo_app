@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome'); 
 });
 
 Auth::routes();
@@ -20,6 +20,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('category','CategoryController');
+Route::resource('role','RoleController');
+Route::resource('user','UserController');
+
 
 Route::get('profile', function(){
     return view('profile');

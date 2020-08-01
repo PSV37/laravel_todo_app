@@ -69,15 +69,17 @@
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">HEADER</li>
+        @can('isAdmin')
         <!-- Optionally, you can add icons to the links -->
-        <li><a href="#"><i class="fa fa-file"></i> <span>Posts</span></a></li>
+        <li><a href="{{url('role')}}"><i class="fa fa-file"></i> <span>Manage Role</span></a></li>
+        @endcan
         
         @can('isAdmin')
          <li class="active"><a href="{{url('category')}}"><i class="fa fa-microchip"></i> <span>Category</span></a></li>
         @endcan
 
         @can('isAdmin')
-        <li><a href="#"><i class="fa fa-users"></i> <span>Manage User</span></a></li>
+        <li><a href="{{url('user')}}"><i class="fa fa-users"></i> <span>Manage User</span></a></li>
         <li><a href="#"><i class="fa fa-gears"></i> <span>Settings</span></a></li>
         @endcan
         <li class="">
@@ -133,10 +135,21 @@
       var button = $(event.relatedTarget) 
       var title = button.data('mytitle') 
       var description = button.data('mydescription') 
+      var name = button.data('myname') 
+      var email = button.data('myemail') 
+      var user_type = button.data('myuser_type') 
+      var password = button.data('mypassword') 
+      
+
       var cat_id = button.data('catid') 
       var modal = $(this)
 
       modal.find('.modal-body #title').val(title);
+      modal.find('.modal-body #name').val(name);
+      modal.find('.modal-body #email').val(email);
+      modal.find('.modal-body #user_type').val(user_type);
+      modal.find('.modal-body #password').val(password);
+
       modal.find('.modal-body #des').val(description);
       modal.find('.modal-body #cat_id').val(cat_id);
 })

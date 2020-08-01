@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use \App\Category;
+use \App\Role;
 use Gate;
 
-class CategoryController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +19,8 @@ class CategoryController extends Controller
             abort(404,"Sorry, You can do this actions");
         }
         
-        $categories = Category::all();
-        return view('category.index',compact('categories'));
+        $roles = Role::all();
+        return view('role.index',compact('roles'));
     }
 
 
@@ -33,9 +33,9 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         
-        Category::create($request->all());
+        Role::create($request->all());
 
-        return back()->with('success_msg', 'Category Added successfully ');
+        return back()->with('success_msg', 'Role Added successfully ');
     }
 
     /**
@@ -70,11 +70,11 @@ class CategoryController extends Controller
     public function update(Request $request)
     {
 
-        $category = Category::findOrFail($request->category_id);
+        $category = Role::findOrFail($request->role_id);
 
         $category->update($request->all());
        
-        return back()->with('success_msg', 'Category Updated successfully ');
+        return back()->with('success_msg', 'Role updated successfully ');
     }
 
     /**
@@ -85,11 +85,12 @@ class CategoryController extends Controller
      */
     public function destroy(Request $request)
     {
+        // return $request;
         
-        $category = Category::findOrFail($request->category_id);
+        $category = Role::findOrFail($request->role_id);
         $category->delete();
 
-        return back()->with('success_msg', 'Category Deleted successfully ');
+        return back()->with('success_msg', 'Role deleted successfully ');
 
     }
 }

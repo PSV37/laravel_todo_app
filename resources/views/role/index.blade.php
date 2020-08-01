@@ -6,7 +6,7 @@
 	<div class="">
 		<div class="box">
 			<div class="box-header">
-				<h3 class="box-title">All Categories</h3>
+				<h3 class="box-title">All Roles</h3>
 				@if( Session::has( 'success_msg' ))
 				<div class="alert alert-success alert-dismissible">
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -29,14 +29,14 @@
 
 					<tbody>
 
-						@foreach($categories as $cat)
+						@foreach($roles as $role)
 							<tr>
-								<td>{{$cat->title}}</td>
-								<td>{!! $cat->description !!}</td>
+								<td>{{$role->name}}</td>
+								<td>{!! $role->description !!}</td>
 								<td>
-									<button class="btn btn-info" data-mytitle="{{$cat->title}}" data-mydescription="{{$cat->description}}" data-catid={{$cat->id}} data-toggle="modal" data-target="#edit">Edit</button>
+									<button class="btn btn-info" data-myname="{{$role->name}}" data-mydescription="{{$role->description}}" data-catid={{$role->id}} data-toggle="modal" data-target="#edit">Edit</button>
 									<!-- / -->
-									<button class="btn btn-danger" data-catid={{$cat->id}} data-toggle="modal" data-target="#delete">Delete</button>
+									<button class="btn btn-danger" data-catid={{$role->id}} data-toggle="modal" data-target="#delete">Delete</button>
 								</td>
 							</tr>
 
@@ -62,12 +62,12 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">New Category</h4>
+        <h4 class="modal-title" id="myModalLabel">New Role</h4>
       </div>
-      <form action="{{route('category.store')}}" method="post">
+      <form action="{{route('role.store')}}" method="post">
       		{{csrf_field()}}
 	      <div class="modal-body">
-				@include('category.form')
+				@include('role.form')
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -86,12 +86,12 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Edit Category</h4>
       </div>
-      <form action="{{route('category.update','test')}}" method="post">
+      <form action="{{route('role.update','test')}}" method="post">
       		{{method_field('patch')}}
       		{{csrf_field()}}
 	      <div class="modal-body">
-	      		<input type="hidden" name="category_id" id="cat_id" value="">
-				@include('category.form')
+	      		<input type="hidden" name="role_id" id="cat_id" value="">
+				@include('role.form')
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -110,14 +110,14 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title text-center" id="myModalLabel"><b>Delete Confirmation</b></h4>
       </div>
-      <form action="{{route('category.destroy','test')}}" method="post">
+      <form action="{{route('role.destroy','test')}}" method="post">
       		{{method_field('delete')}}
       		{{csrf_field()}}
 	      <div class="modal-body">
 				<p class="text-center">
 					Are you sure you want to delete this?
 				</p>
-	      		<input type="hidden" name="category_id" id="cat_id" value="">
+                <input type="hidden" name="role_id" id="cat_id" value="">
 
 	      </div>
 	      <div class="modal-footer">

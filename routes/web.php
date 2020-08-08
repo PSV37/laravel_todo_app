@@ -17,11 +17,33 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
+Route::post('add-name/', [
+    "as" => "add-name-to-db",
+    "uses" => "TodoController@store" 
+]);
+   
+Route::post('reove-name/', [
+    "as" => "remove-name-to-db",
+    "uses" => "TodoController@destroy" 
+]);
+
+Route::get('all-records/', [
+    "as" => "all-records",
+    "uses" => "TodoController@index" 
+]);
+      
+    
+    
+    
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('category','CategoryController');
 Route::resource('role','RoleController');
 Route::resource('user','UserController');
+
+
 
 
 Route::get('profile', function(){

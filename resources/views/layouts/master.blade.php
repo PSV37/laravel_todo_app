@@ -8,9 +8,32 @@
   <title>Admin Panel</title>
    <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
+  
   <link rel="stylesheet" href="{{asset('css/app.css')}}">
+  <link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/dist/css/skins/_all-skins.min.css">
+
+  <!-- <link rel="stylesheet" href="https://adminlte.io/themes/dev/AdminLTE/dist/css/adminlte.min.css"> -->
 
 
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<style>
+
+
+
+@media (min-width: 992px) {
+  .main-sidebar.sidebar-collapse .main-sidebar, .main-sidebar.sidebar-collapse .main-sidebar::before {
+    margin-left: 0;
+    width: 4.6rem;
+}
+}
+
+
+</style>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -22,7 +45,7 @@
     <!-- Logo -->
     <a href="index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b>Logo</span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>Management</b></span>
     </a>
@@ -37,7 +60,7 @@
     </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -69,19 +92,12 @@
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">HEADER</li>
-        @can('isAdmin')
-        <!-- Optionally, you can add icons to the links -->
-        <li><a href="{{url('role')}}"><i class="fa fa-file"></i> <span>Manage Role</span></a></li>
-        @endcan
-        
-        @can('isAdmin')
-         <li class="active"><a href="{{url('category')}}"><i class="fa fa-microchip"></i> <span>Category</span></a></li>
-        @endcan
 
-        @can('isAdmin')
+
+        <li><a href="{{url('home')}}"><i class="fa fa-users"></i> <span>Todo</span></a></li>
         <li><a href="{{url('user')}}"><i class="fa fa-users"></i> <span>Manage User</span></a></li>
-        <li><a href="#"><i class="fa fa-gears"></i> <span>Settings</span></a></li>
-        @endcan
+        
+   
         <li class="">
 
            <a href="{{ route('logout') }}"
@@ -129,41 +145,13 @@
 
 <script>
 
-  
-  $('#edit').on('show.bs.modal', function (event) {
-
-      var button = $(event.relatedTarget) 
-      var title = button.data('mytitle') 
-      var description = button.data('mydescription') 
-      var name = button.data('myname') 
-      var email = button.data('myemail') 
-      var user_type = button.data('myuser_type') 
-      var password = button.data('mypassword') 
-      
-
-      var cat_id = button.data('catid') 
-      var modal = $(this)
-
-      modal.find('.modal-body #title').val(title);
-      modal.find('.modal-body #name').val(name);
-      modal.find('.modal-body #email').val(email);
-      modal.find('.modal-body #user_type').val(user_type);
-      modal.find('.modal-body #password').val(password);
-
-      modal.find('.modal-body #des').val(description);
-      modal.find('.modal-body #cat_id').val(cat_id);
-})
-
-
-  $('#delete').on('show.bs.modal', function (event) {
-
-      var button = $(event.relatedTarget) 
-
-      var cat_id = button.data('catid') 
-      var modal = $(this)
-
-      modal.find('.modal-body #cat_id').val(cat_id);
-})
+$(".sidebar-mini").hover( function() {
+  // $('.main-sidebar').slideToggle();
+  $(".sidebar-mini").toggleClass("active");
+}, function () {
+  // $('.main-sidebar').slideToggle();
+  $(".sidebar-mini").toggleClass("active");
+});
 
 
 </script>

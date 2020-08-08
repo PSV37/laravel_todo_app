@@ -22,7 +22,9 @@
     },
     "dependencies": {
         "admin-lte": "^2.4.2",
+        "bootstrap-sweetalert": "^1.0.1",
         "codemirror": "^5.34.0",
-        "summernote": "^0.8.9"
+        "summernote": "^0.8.9",
+        "sweetalert": "^2.1.2"
     }
 }
